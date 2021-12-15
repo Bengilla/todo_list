@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Todo List{% endblock %}
+{% block content %}
+
+<div class="title">TODO LIST</div>
+<div class="frame">
+
+    <!-- Note -->
+    {% for note in notes %}
+    <div class="date">{{ note["date"] }}</div>
+    <div class="new_todo" style="border: {{ note['bd_outline'] }} solid {{ note['bd_color'] }};
+    color: {{ note['bd_color'] }};
+    text-decoration: {{ note['done_line'] }};">
+        {{ note["notes"] }}
+        <a href="{{ url_for('mark', id=note.id) }}"><img src="/static/star.svg" class="star" alt="Mark" onmouseover="this.src='/static/star-change.svg'" onmouseout="this.src='/static/star.svg'" style='display: {{ note["done_display"] }}'></a>
+        <a href="{{ url_for('done', id=note.id) }}"><img src="/static/done.svg" id="button" class="done" alt="Done" onmouseover="this.src='/static/done-change.svg'" onmouseout="this.src='/static/done.svg'"></a>
+        <a href="{{ url_for('delete', id=note.id) }}"><img src="/static/delete.svg" class="delete" alt="Delete" onmouseover="this.src='/static/delete-change.svg'" onmouseout="this.src='/static/delete.svg'"></a>
+    </div>
+    {% endfor %}
+
+    <!-- Input -->
+    <div class="input_frame">
+        <form method="POST">
+            <input type="text" class="input" placeholder="Create Todo List" name="note">
+            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
+        </form>
+    </div>
+
+{% endblock %}
