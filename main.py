@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 Bootstrap(app)
 db = SQLAlchemy(app)
 
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(20), nullable=False)
@@ -21,13 +22,16 @@ class Todo(db.Model):
     bd_outline = db.Column(db.String(4), default="1px", nullable=False)
     done_line = db.Column(db.String(20), default="none", nullable=False)
     done_display = db.Column(db.String(20), default="flex", nullable=False)
-        
+
+
 db.create_all()
+
 
 @app.route("/")
 def main():
     all_notes = db.session.query(Todo).all()
     return render_template("index.html", notes=all_notes)
+
 
 @app.route("/", methods=["POST"])
 def add():
@@ -37,6 +41,7 @@ def add():
         db.session.add(save_note)
         db.session.commit()
     return redirect("/")
+
 
 @app.route("/mark")
 def mark():
@@ -51,6 +56,7 @@ def mark():
         note.bd_outline = "1px"
         db.session.commit()
     return redirect("/")
+
 
 @app.route("/done")
 def done():
@@ -69,6 +75,7 @@ def done():
         db.session.commit()
     return redirect("/")
 
+
 @app.route("/delete")
 def delete():
     note_id = request.args.get("id")
@@ -76,6 +83,7 @@ def delete():
     db.session.delete(note)
     db.session.commit()
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
