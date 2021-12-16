@@ -34,7 +34,6 @@ def add():
     if request.method == "POST":
         get_notes = request.form['note']
         save_note = Todo(date=date_now, notes=f"{get_notes}")
-        db.create_all()
         db.session.add(save_note)
         db.session.commit()
     return redirect("/")
