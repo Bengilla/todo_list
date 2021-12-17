@@ -26,8 +26,13 @@ body {
 
 .date {
     position: absolute;
-    margin: -8px 50% 0 45%;
-    padding: 0 6px;
+    left: 47%;
+    text-align: center;
+    width: 70px;
+    /* justify-content: center;
+    align-items: center; */
+    /* margin: -8px auto; */
+    margin-top: -8px;
     color: #969696;
     font-size: 12px;
     font-weight: 300;
