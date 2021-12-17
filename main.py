@@ -26,11 +26,10 @@ class Todo(db.Model):
 
 db.create_all()
 
-
 @app.route("/")
 def main():
     all_notes = db.session.query(Todo).all()
-    return render_template("index.html", notes=all_notes)
+    return render_template("index.html", notes=all_notes, year=date.year)
 
 
 @app.route("/", methods=["POST"])
@@ -87,3 +86,4 @@ def delete():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
